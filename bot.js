@@ -128,8 +128,10 @@ client.on('message', async msg => {
         //blacklists user
     }
     if(command === 'unblacklist') {
-        const staffRole = await msg.guild.roles.cache.get('747251006160502794')
-        if(!msg.member.roles.cache.has(staffRole)) return
+        console.log('unblacklist')
+        const staffRole = msg.guild.roles.cache.get('747251006160502794')
+        console.log(staffRole)
+        if (!msg.member.roles.cache.some((role) => role.id === staffRole.id)) return msg.channel.send('You need staff role to use this command!')
         const mention = msg.mentions.members.first()
         const user = client.users.cache.get(args[1]) || mention
         if(!user) return msg.channel.send('You must mention someone to unblacklist!')
